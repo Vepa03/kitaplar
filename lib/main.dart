@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kitaplar/home_page.dart';
+import 'package:kitaplar/them_Provider.dart';
+import 'package:kitaplar/theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(create: (context) => ThemeProvider(),
+    child: const MyApp(),)
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage()
+      home: HomePage(),
+      theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
 }
