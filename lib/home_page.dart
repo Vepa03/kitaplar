@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kitaplar/pages/about_us.dart';
+import 'package:kitaplar/pages/hemmesi.dart';
 import 'package:kitaplar/them_Provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -35,9 +36,20 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("data"),
-        backgroundColor: Colors.amber,
+        title: Text("Kitaplar"),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15.0),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Hemmesi()));
+              },
+              child: Icon(Icons.grid_view_rounded)),
+          )
+        ],
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
