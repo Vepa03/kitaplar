@@ -14,6 +14,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int saylanIndex = 0;
+  static const TextStyle optionalstyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOption = <Widget>[
+    Text("Home", style: optionalstyle,),
+    Text("Kitaplar", style: optionalstyle,),
+    Text("Shajyrlar", style: optionalstyle,)
+  ];
+
   String tema = "Gije";
   bool ikon = false;
 
@@ -26,6 +34,12 @@ class _HomePageState extends State<HomePage> {
   void ikon_uytget(){
     setState(() {
       ikon =! ikon;
+    });
+  }
+
+  void _onitemTapped(int index){
+    setState(() {
+      saylanIndex = index;
     });
   }
   
@@ -99,9 +113,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Center(
+      body: Center(child: _widgetOption.elementAt(saylanIndex),),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Kitap"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "dewdew")
+        ],
+        currentIndex: saylanIndex,
+        selectedItemColor: Colors.amber,
+        onTap: _onitemTapped,
+        ),
         
-      ),
     );
   }
 }
