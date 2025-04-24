@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kitaplar/pages/about_us.dart';
+import 'package:kitaplar/pages/books.dart';
 import 'package:kitaplar/pages/hemmesi.dart';
+import 'package:kitaplar/pages/home.dart';
 import 'package:kitaplar/them_Provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -15,11 +18,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int saylanIndex = 0;
-  static const TextStyle optionalstyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOption = <Widget>[
-    Text("Home", style: optionalstyle,),
-    Text("Kitaplar", style: optionalstyle,),
-    Text("Shajyrlar", style: optionalstyle,)
+    Home(),
+    Books(),
+    Text("Shajyrlar",)
   ];
 
   String tema = "Gije";
@@ -50,8 +52,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kitaplar"),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text("Kitaplar",style: Theme.of(context).textTheme.titleLarge),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
@@ -59,11 +60,10 @@ class _HomePageState extends State<HomePage> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Hemmesi()));
               },
-              child: Icon(Icons.grid_view_rounded)),
+              child: FaIcon(FontAwesomeIcons.listUl, color: Theme.of(context).iconTheme.color, size: 20,)),
           )
         ],
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -77,22 +77,22 @@ class _HomePageState extends State<HomePage> {
               Column(
                 children: [
                   ListTile(
-                    leading: Icon(Icons.share),
-                    title: Text("Paylas"),
+                    leading: Icon(Icons.share, color: Theme.of(context).iconTheme.color,),
+                    title: Text("Paylas",style: Theme.of(context).textTheme.titleMedium),
                     onTap: (){
                       
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.info_outline),
-                    title: Text("Biz Hakynda"),
+                    leading: Icon(Icons.info_outline, color: Theme.of(context).iconTheme.color,),
+                    title: Text("Biz Hakynda", style: Theme.of(context).textTheme.titleMedium,),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutUs()));
                     },
                   ),
                   ListTile(
-                    leading: Icon(ikon ? Icons.sunny : Icons.nightlight_outlined),
-                    title: Text(tema),
+                    leading: Icon(ikon ? Icons.sunny : Icons.nightlight_outlined, color: Theme.of(context).iconTheme.color,),
+                    title: Text(tema , style: Theme.of(context).textTheme.titleMedium),
                     onTap: (){
                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                       Uytget();
@@ -101,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Divider(color: Colors.black,),
                   ListTile(
-                    leading: Icon(Icons.exit_to_app),
-                    title: Text("Cykalga"),
+                    leading: Icon(Icons.exit_to_app, color: Theme.of(context).iconTheme.color,),
+                    title: Text("Cykalga",style: Theme.of(context).textTheme.titleMedium),
                     onTap:(){
                       Navigator.pop(context);
                     }
@@ -115,10 +115,10 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(child: _widgetOption.elementAt(saylanIndex),),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Kitap"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "dewdew")
+        items:  <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house, color: Theme.of(context).iconTheme.color, size: 20,), label: ""),
+          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.bookOpen, color: Theme.of(context).iconTheme.color,size: 20), label: ""),
+          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.book, color: Theme.of(context).iconTheme.color,size: 20), label: "")
         ],
         currentIndex: saylanIndex,
         selectedItemColor: Colors.amber,
