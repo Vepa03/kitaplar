@@ -6,6 +6,19 @@ ThemeData lightMode = ThemeData(
     
   ),
 
+  appBarTheme: AppBarTheme(
+    elevation: 2,
+    shadowColor: Colors.black.withOpacity(0.6),
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.black
+  ),
+
+  bottomAppBarTheme: BottomAppBarTheme(
+    elevation: 2,
+    shadowColor: Colors.black.withOpacity(0.6),
+    color: Colors.white
+  ),
+
 
   textTheme: TextTheme(
     titleMedium: TextStyle(color: Colors.black),
@@ -22,6 +35,18 @@ ThemeData darkMode = ThemeData(
     brightness: Brightness.dark,
   ),
 
+  appBarTheme: AppBarTheme(
+    elevation: 2,
+    shadowColor: Colors.white.withOpacity(0.5),
+    backgroundColor: Colors.black,
+    foregroundColor: Colors.white
+  ), 
+
+  bottomAppBarTheme: BottomAppBarTheme(
+    elevation: 2,
+    shadowColor: Colors.white.withOpacity(0.6),
+    color: Colors.black
+  ),
 
   textTheme: TextTheme(
     titleMedium: TextStyle(color: Colors.white),

@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Kitaplar",style: Theme.of(context).textTheme.titleLarge),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
@@ -115,6 +116,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(child: _widgetOption.elementAt(saylanIndex),),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).bottomAppBarTheme.color,
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house, color: Theme.of(context).iconTheme.color, size: 20,), label: ""),
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.bookOpen, color: Theme.of(context).iconTheme.color,size: 20), label: ""),
