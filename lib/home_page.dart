@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kitaplar/pages/about_us.dart';
 import 'package:kitaplar/pages/books.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FlutterLocalization _localization = FlutterLocalization.instance;
   int saylanIndex = 0;
   static const List<Widget> _widgetOption = <Widget>[
     Home(),
@@ -44,6 +46,28 @@ class _HomePageState extends State<HomePage> {
       saylanIndex = index;
     });
   }
+
+  void _notify(){
+    AlertDialog(
+      title: Text("Dilini Haysyna Uytgetmekci ? "),
+      content: Row(
+        children: [
+          ElevatedButton(onPressed: (){
+
+          }, 
+          child: Text("Inlis Dili")),
+          ElevatedButton(onPressed: (){
+
+          }, child: Text("Turkmen Dili"))
+        ],
+      ),
+    );
+  }
+
+  
+
+
+
   
   @override
   Widget build(BuildContext context) {
@@ -89,6 +113,13 @@ class _HomePageState extends State<HomePage> {
                     title: Text("Biz Hakynda", style: Theme.of(context).textTheme.titleMedium,),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutUs()));
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.info_outline, color: Theme.of(context).iconTheme.color,),
+                    title: Text("Dilini Uytget", style: Theme.of(context).textTheme.titleMedium,),
+                    onTap: (){
+                      _notify();
                     },
                   ),
                   ListTile(
