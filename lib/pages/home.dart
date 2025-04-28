@@ -6,10 +6,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ElevatedButton(onPressed: (){
-
-      }, 
-      child: Text("Click"))
+      body: Text("data")
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kitaplar/pages/about_us.dart';
 import 'package:kitaplar/pages/books.dart';
+import 'package:kitaplar/pages/goshgylar.dart';
 import 'package:kitaplar/pages/hemmesi.dart';
 import 'package:kitaplar/pages/home.dart';
 import 'package:kitaplar/them_Provider.dart';
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   static const List<Widget> _widgetOption = <Widget>[
     Home(),
     Books(),
-    Text("Shajyrlar",)
+    Goshgylar()
   ];
 
   String tema = "Gije";
@@ -99,12 +100,28 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.info_outline, color: Theme.of(context).iconTheme.color,),
+                    leading: Icon(Icons.language, color: Theme.of(context).iconTheme.color,),
                     title: Text("Dilini Uytget", style: Theme.of(context).textTheme.titleMedium,),
-                    onTap: (){
-                      
-                    },
+                    onTap: ()=>showDialog(
+                      context: context, 
+                      builder: (BuildContext context)=>AlertDialog(
+                        title: Text("Dilini Uytget"),
+                        content: Text("Dilini uytgetmelimi ?"),
+                        actions: [
+                          TextButton(onPressed: (){
+
+                          }, 
+                          child: Text("Hawa")
+                          ),
+                          TextButton(onPressed: (){
+                            Navigator.pop(context, "Cancel");
+                          }, 
+                          child: Text("Yok"))
+                        ],
+                      )
+                    )    
                   ),
+                  
                   ListTile(
                     leading: Icon(ikon ? Icons.sunny : Icons.nightlight_outlined, color: Theme.of(context).iconTheme.color,),
                     title: Text(tema , style: Theme.of(context).textTheme.titleMedium),
