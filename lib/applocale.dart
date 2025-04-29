@@ -13,6 +13,7 @@ mixin Applocale {
   static const String language_content = 'language_content';
   static const String english = 'english';
   static const String turkish = 'turkish';
+  static const String all_books = 'All books';
   
   
 
@@ -33,6 +34,7 @@ mixin Applocale {
     language_content: 'Which language do you want to change ?',
     english: 'English',
     turkish: 'Turkmen',
+    all_books: 'All Books',
   };
   static const Map<String, dynamic> KM = {
     title: 'Kitaplar',
@@ -49,6 +51,7 @@ mixin Applocale {
     language_content: 'Dilini haysy dile owurmek isleyarsin ?',
     english: 'Inlis dili',
     turkish: 'Turkmen Dili',
+    all_books: 'Hemme Kitaplar',
   };
   
 }

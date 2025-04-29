@@ -27,8 +27,7 @@ class _HomePageState extends State<HomePage> {
   int saylanIndex = 0;
   static const List<Widget> _widgetOption = <Widget>[
     Home(),
-    Books(),
-    Goshgylar()
+    Books()
   ];
 
   String tema = "Gije";
@@ -175,7 +174,7 @@ class _HomePageState extends State<HomePage> {
         items:  <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.house, color: Theme.of(context).iconTheme.color, size: 20,), label: ""),
           BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.bookOpen, color: Theme.of(context).iconTheme.color,size: 20), label: ""),
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.book, color: Theme.of(context).iconTheme.color,size: 20), label: "")
+          
         ],
         currentIndex: saylanIndex,
         selectedItemColor: Colors.amber,
