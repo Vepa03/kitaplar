@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kitaplar/applocale.dart';
+import 'package:kitaplar/main.dart';
 import 'package:kitaplar/pages/about_us.dart';
 import 'package:kitaplar/pages/books.dart';
 import 'package:kitaplar/pages/goshgylar.dart';
@@ -18,6 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final FlutterLocalization _localization = FlutterLocalization.instance;
+  
+
   int saylanIndex = 0;
   static const List<Widget> _widgetOption = <Widget>[
     Home(),
@@ -30,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   void Uytget(){
     setState(() {
-      tema = tema=="Gije" ? "Gundiz" : "Gije";
+      tema = tema==Applocale.night.getString(context) ? Applocale.light.getString(context) : Applocale.night.getString(context);
     });
   }
 
@@ -60,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Kitaplar",style: Theme.of(context).textTheme.titleLarge),
+        title: Text(Applocale.title.getString(context),style: Theme.of(context).textTheme.titleLarge),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         actions: [
           Padding(
@@ -87,36 +93,38 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ListTile(
                     leading: Icon(Icons.share, color: Theme.of(context).iconTheme.color,),
-                    title: Text("Paylas",style: Theme.of(context).textTheme.titleMedium),
+                    title: Text(Applocale.share.getString(context),style: Theme.of(context).textTheme.titleMedium),
                     onTap: (){
                       
                     },
                   ),
                   ListTile(
                     leading: Icon(Icons.info_outline, color: Theme.of(context).iconTheme.color,),
-                    title: Text("Biz Hakynda", style: Theme.of(context).textTheme.titleMedium,),
+                    title: Text(Applocale.about_us.getString(context), style: Theme.of(context).textTheme.titleMedium,),
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutUs()));
                     },
                   ),
                   ListTile(
                     leading: Icon(Icons.language, color: Theme.of(context).iconTheme.color,),
-                    title: Text("Dilini Uytget", style: Theme.of(context).textTheme.titleMedium,),
+                    title: Text(Applocale.change_lan.getString(context), style: Theme.of(context).textTheme.titleMedium,),
                     onTap: ()=>showDialog(
                       context: context, 
                       builder: (BuildContext context)=>AlertDialog(
-                        title: Text("Dilini Uytget"),
-                        content: Text("Dilini uytgetmelimi ?"),
+                        title: Text(Applocale.change_lan.getString(context), style: Theme.of(context).textTheme.titleLarge,),
+                        content: Text(Applocale.language_content.getString(context), style: Theme.of(context).textTheme.titleMedium,),
                         actions: [
                           TextButton(onPressed: (){
-
+                            _localization.translate('en');
+                            Navigator.pop(context);
                           }, 
-                          child: Text("Hawa")
+                          child: Text(Applocale.english.getString(context), style: Theme.of(context).textTheme.titleMedium,)
                           ),
                           TextButton(onPressed: (){
-                            Navigator.pop(context, "Cancel");
+                            _localization.translate('km');
+                            Navigator.pop(context);
                           }, 
-                          child: Text("Yok"))
+                          child: Text(Applocale.turkish.getString(context), style: Theme.of(context).textTheme.titleMedium,))
                         ],
                       )
                     )    
@@ -134,10 +142,26 @@ class _HomePageState extends State<HomePage> {
                   const Divider(color: Colors.black,),
                   ListTile(
                     leading: Icon(Icons.exit_to_app, color: Theme.of(context).iconTheme.color,),
-                    title: Text("Cykalga",style: Theme.of(context).textTheme.titleMedium),
-                    onTap:(){
-                      Navigator.pop(context);
-                    }
+                    title: Text(Applocale.exit.getString(context),style: Theme.of(context).textTheme.titleMedium),
+                    onTap:()=>showDialog(
+                      context: context, 
+                      builder: (BuildContext context)=>AlertDialog(
+                        title: Text(Applocale.exit.getString(context), style: Theme.of(context).textTheme.titleLarge,),
+                        content: Text(Applocale.exit_content.getString(context), style: Theme.of(context).textTheme.titleSmall,),
+                        actions: [
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
+                            child: Text(Applocale.yes.getString(context), style: Theme.of(context).textTheme.titleMedium,)),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
+                            child: Text(Applocale.no.getString(context), style: Theme.of(context).textTheme.titleMedium,))
+                        ],
+                      ))             
+            
                   ),
                 ],
               ),
