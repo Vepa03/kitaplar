@@ -16,50 +16,56 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     ApiService apiService = ApiService();
   
     return Scaffold(
       body: Center(
-        child: FutureBuilder(
-          future: apiService.getComments(),
-          builder: (context, snapshot){
-            if(snapshot.hasData){
-              var writers = snapshot.data!;
-              return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0),
-                itemCount: writers.length,
-                itemBuilder: (context, index){
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: FutureBuilder(
+            future: apiService.getComments(),
+            builder: (context, snapshot){
+              if(snapshot.hasData){
+                var writers = snapshot.data!;
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0),
+                  itemCount: writers.length,
+                  itemBuilder: (context, index){
+                    return GestureDetector(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> WriterDetailPage(writerId: writers[index].id!)));
                       },
-                      child: Card(
-                        child: Column(
-                          children: [
-                            Text(writers[index].usernameTm.toString()),
-                            Image.network(writers[index].image.toString(), 
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(writers[index].image.toString(), 
                               width: double.infinity,
-                              height: 100,
-                              fit: BoxFit.cover,),
-                            SizedBox(height: 20 ,)
-                          ],
-                        ),
+                              height: screenHeight*0.15,
+                              fit: BoxFit.fill,),
+                          ),
+                          Text(writers[index].usernameTm.toString(), style: Theme.of(context).textTheme.titleMedium),
+                          SizedBox(height: 20 ,)
+                        ],
                       ),
-                    ),
-                  );
-                });
-            }else if(snapshot.hasError){
-              return Text("${snapshot.error}");
-            }
-            return const CircularProgressIndicator();
-          }),
+                    );
+                  });
+              }else if(snapshot.hasError){
+                return Text("${snapshot.error}");
+              }else(
+                Image.asset("lib/assets/images/books.png")
+              );
+              return const CircularProgressIndicator();
+            }),
+        ),
       )
     );
   }
@@ -96,6 +102,8 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: Text("Yazar Detayı")),
       body: FutureBuilder<WriterDetail>(
@@ -110,12 +118,12 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
           } else {
             var writer = snapshot.data!;
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(10.0),
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10), 
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0), 
                 itemCount: writer.books?.length ?? 0,
                 itemBuilder: (context, index){
                   var book = writer.books?[index];
@@ -123,18 +131,19 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
                     onTap: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Pdf_acyancy(name: book?.titleTm ?? "ady", pdf: book?.file ?? "PDF yok")));
                     },
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Text(book?.titleTm ?? "Text Null"),
-                          Image.network(book?.image ?? "Image null", 
-                          fit: BoxFit.cover, 
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image.network(book?.image ?? "Image null", 
+                          fit: BoxFit.fill, 
                           width: double.infinity, 
-                          height: 50,
+                          height: screenHeight*0.15,
                           ),
-                        ],
-                    
-                      ),
+                        ),
+                        Text(book?.titleTm ?? "Text Null", style: Theme.of(context).textTheme.titleMedium),
+                      ],
+                                        
                     ),
                   );
                   

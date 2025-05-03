@@ -14,6 +14,8 @@ mixin Applocale {
   static const String english = 'english';
   static const String turkish = 'turkish';
   static const String all_books = 'All books';
+  static const String biz_hakynda = 'Biz Hakynda';
+
   
   
 
@@ -35,6 +37,8 @@ mixin Applocale {
     english: 'English',
     turkish: 'Turkmen',
     all_books: 'All Books',
+    biz_hakynda: "Welcome to our Books App — your gateway to the world of stories and knowledge! \n\nOur application offers a diverse collection of books, ranging from entertaining children's stories to captivating novels and insightful works from Turkmen authors. Whether you're looking to immerse yourself in the magical world of children's literature, dive into thrilling novels, or explore the cultural heritage of Turkmenistan through its writers, we have something for everyone. \n\nIn addition, we provide carefully selected English books to help broaden your reading experience and support language learning.\nWe believe books are the key to imagination, education, and growth. That\’s why our mission is to make reading accessible and enjoyable for readers of all ages.\nIf you have any suggestions about books, let us know — we would love to hear from you! \nThank you for choosing our app. Happy reading!"
+    
   };
   static const Map<String, dynamic> KM = {
     title: 'Kitaplar',
@@ -52,6 +56,7 @@ mixin Applocale {
     english: 'Inlis dili',
     turkish: 'Turkmen Dili',
     all_books: 'Hemme Kitaplar',
+    biz_hakynda: "Kitaplar Programamyza hoş geldiňiz — bu ýer hekaýalaryň we bilimiň älemine açylan gapydyr!\n\nProgrammamyz dürli kitaplar ýygyndysyny hödürleýär: gyzykly çagalar ertekilerinden başlap täsirli romanlara we türkmen ýazyjylarynyň gymmatly eserlerine çenli. Çagalaryň edebiýat dünýäsine çümmek, täsirli romanlary okamak ýa-da Türkmenistanyň medeni mirasyny öwrenmek isleýän bolsaňyz, bu ýerde hemmeler üçin bir zat bar.\nMundan başga-da, biz okamak tejribäňizi giňeltmek we dil öwrenmegiňizi goldamak üçin aýratyn saýlanan iňlis kitaplaryny hem hödürleýäris.\nKitaplaryň hyýalyň, bilimiň we ösüşiň açarydygyna ynanýarys. Şonuň üçin maksadymyz — ähli ýaşdaky okyjylar üçin kitap okamagy elýeterli we höweslendiriji etmek.\nEger kitaplar barada haýsydyr bir teklibiňiz bar bolsa, bize habar bermegiňizi isleýäris — size diňlemäge şat bolarys!\n\nProgrammamyz saýlan üçin köp sag boluň.",
   };
   
 }
