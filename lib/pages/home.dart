@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:http/http.dart' as http;
+import 'package:kitaplar/applocale.dart';
 import 'package:kitaplar/utils/models/writer_detail.dart';
 import 'package:kitaplar/utils/services/api_service.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -19,8 +21,8 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     ApiService apiService = ApiService();
   
     return Scaffold(
@@ -59,10 +61,13 @@ class _HomeState extends State<Home> {
                     );
                   });
               }else if(snapshot.hasError){
-                return Text("${snapshot.error}");
-              }else(
-                Image.asset("lib/assets/images/books.png")
-              );
+                return Column(
+                  children: [
+                    Image.asset("lib/assets/images/no_wifi.png", width: screenWidth*0.8, height:screenHeight*0.4,),
+                    Text(Applocale.sorry_for.getString(context),style: Theme.of(context).textTheme.titleMedium)
+                  ],
+                );
+              }
               return const CircularProgressIndicator();
             }),
         ),
@@ -102,7 +107,6 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: Text("Yazar Detayı")),
