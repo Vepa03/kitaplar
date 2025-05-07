@@ -7,7 +7,7 @@ import 'package:kitaplar/applocale.dart';
 import 'package:kitaplar/utils/models/writer_detail.dart';
 import 'package:kitaplar/utils/services/api_service.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
+import 'package:redacted/redacted.dart';
 
 
 class Home extends StatefulWidget {
@@ -32,7 +32,35 @@ class _HomeState extends State<Home> {
           child: FutureBuilder(
             future: apiService.getComments(),
             builder: (context, snapshot){
-              if(snapshot.hasData){
+              if(snapshot.connectionState == ConnectionState.waiting){
+                // REDACTED KULLANIMI
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0),
+                  itemCount: 8,
+                  itemBuilder: (context, index){
+                    return Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: screenHeight * 0.15,
+                            color: Colors.grey.shade300,
+                          ).redacted(context: context, redact: true),
+                          SizedBox(height: 10),
+                          Container(
+                            width: 100,
+                            height: 20,
+                            color: Colors.grey.shade300,
+                          ).redacted(context: context, redact: true),
+                          SizedBox(height: 20),
+                          
+                          
+                        ],
+                    );
+                  });
+                }else if(snapshot.hasData){
                 var writers = snapshot.data!;
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
