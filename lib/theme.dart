@@ -22,7 +22,8 @@ ThemeData lightMode = ThemeData(
 
   textTheme: TextTheme(
     titleMedium: TextStyle(color: Colors.black),
-    titleLarge: TextStyle(color: Colors.black)
+    titleLarge: TextStyle(color: Colors.black),
+    titleSmall: TextStyle(color: Colors.black)
   ),
 
 
@@ -50,7 +51,8 @@ ThemeData darkMode = ThemeData(
 
   textTheme: TextTheme(
     titleMedium: TextStyle(color: Colors.white),
-    titleLarge: TextStyle(color: Colors.white)
+    titleLarge: TextStyle(color: Colors.white),
+    titleSmall: TextStyle(color: Colors.white),
   ),
 
   iconTheme: IconThemeData(color: Colors.white)

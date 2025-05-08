@@ -9,6 +9,7 @@ import 'package:kitaplar/pages/home.dart';
 import 'package:kitaplar/them_Provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -92,7 +93,10 @@ class _HomePageState extends State<HomePage> {
                     leading: Icon(Icons.share, color: Theme.of(context).iconTheme.color,),
                     title: Text(Applocale.share.getString(context),style: Theme.of(context).textTheme.titleMedium),
                     onTap: (){
-                      
+                      Share.share(
+                      "https://babayev.vercel.app/",
+                      subject: "Kitap uygulaması linki",
+                    );
                     },
                   ),
                   ListTile(
