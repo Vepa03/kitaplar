@@ -80,7 +80,19 @@ class _HomeState extends State<Home> {
                             child: Image.network(writers[index].image.toString(), 
                               width: double.infinity,
                               height: screenHeight*0.15,
-                              fit: BoxFit.fill,),
+                              fit: BoxFit.fill,
+                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child; // Resim tamamen yüklenmiş hali
+                                }
+                                return Container(
+                                  width: double.infinity,
+                                  height: screenHeight * 0.09,
+                                  color: Colors.grey.shade300,
+                                  child: Center(child: CircularProgressIndicator()),
+                                );
+                              }
+                              ),
                           ),
                           Text(writers[index].usernameTm.toString(), style: Theme.of(context).textTheme.titleMedium,
                           overflow: TextOverflow.ellipsis,
@@ -128,7 +140,7 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
 
   Future<WriterDetail> fetchWriterDetail() async {
     final response = await http
-        .get(Uri.parse('http://172.22.56.32:8000/api/writers/${widget.writerId}/'));
+        .get(Uri.parse('https://kitaplar-backend.onrender.com/api/writers/${widget.writerId}/'));
 
     if (response.statusCode == 200) {
       return WriterDetail.fromJson(json.decode(response.body));

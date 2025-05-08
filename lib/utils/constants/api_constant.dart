@@ -1,1 +1,2 @@
-const String url = "http://172.22.56.32:8000/api/writers/";
+const String url = "https://kitaplar-backend.onrender.com/api/writers/";
+const String url_book = "https://kitaplar-backend.onrender.com/api/books/";
