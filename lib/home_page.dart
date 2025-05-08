@@ -66,16 +66,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(Applocale.title.getString(context),style: Theme.of(context).textTheme.titleLarge),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Hemmesi()));
-              },
-              child: FaIcon(FontAwesomeIcons.listUl, color: Theme.of(context).iconTheme.color, size: 20,)),
-          )
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 15.0),
+        //     child: GestureDetector(
+        //       onTap: (){
+        //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Hemmesi()));
+        //       },
+        //       child: FaIcon(FontAwesomeIcons.listUl, color: Theme.of(context).iconTheme.color, size: 20,)),
+        //   )
+        // ],
       ),
       drawer: Drawer(
         child: Padding(
