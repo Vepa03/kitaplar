@@ -82,27 +82,30 @@ class AboutUs extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                elevation: 2,
-                child: Image.asset("lib/assets/images/books.png", width: 150, height: 150),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                Applocale.title.getString(context),
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 5),
-              Text(
-                Applocale.biz_hakynda.getString(context),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  elevation: 2,
+                  child: Image.asset("lib/assets/images/books.png", width: 150, height: 150),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  Applocale.title.getString(context),
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  Applocale.biz_hakynda.getString(context),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                
+              ],
+            ),
           ),
         ),
       ),

@@ -65,13 +65,13 @@ class _HomeState extends State<Home> {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 5.0,
-                    crossAxisSpacing: 5.0),
+                    mainAxisSpacing: 10.0,
+                    crossAxisSpacing: 20.0),
                   itemCount: writers.length,
                   itemBuilder: (context, index){
                     return GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> WriterDetailPage(writerId: writers[index].id!)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> WriterDetailPage(writerId: writers[index].id!, app_title: writers[index].usernameTm!,)));
                       },
                       child: Column(
                         children: [
@@ -82,7 +82,10 @@ class _HomeState extends State<Home> {
                               height: screenHeight*0.15,
                               fit: BoxFit.fill,),
                           ),
-                          Text(writers[index].usernameTm.toString(), style: Theme.of(context).textTheme.titleMedium),
+                          Text(writers[index].usernameTm.toString(), style: Theme.of(context).textTheme.titleMedium,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          maxLines: 1,),
                           SizedBox(height: 20 ,)
                         ],
                       ),
@@ -106,8 +109,9 @@ class _HomeState extends State<Home> {
 
 class WriterDetailPage extends StatefulWidget {
   final int writerId;
+  final String app_title;
 
-  const WriterDetailPage({required this.writerId});
+  const WriterDetailPage({required this.writerId, required this.app_title});
 
   @override
   State<WriterDetailPage> createState() => _WriterDetailPageState();
@@ -124,7 +128,7 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
 
   Future<WriterDetail> fetchWriterDetail() async {
     final response = await http
-        .get(Uri.parse('http://192.168.100.11:8001/api/writers/${widget.writerId}/'));
+        .get(Uri.parse('http://172.22.56.32:8000/api/writers/${widget.writerId}/'));
 
     if (response.statusCode == 200) {
       return WriterDetail.fromJson(json.decode(response.body));
@@ -137,24 +141,47 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(title: Text("Yazar Detayı")),
-      body: FutureBuilder<WriterDetail>(
-        future: futureDetail,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text("Hata: ${snapshot.error}"));
-          } else if (!snapshot.hasData) {
-            return Center(child: Text("Detay yok"));
-          } else {
-            var writer = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GridView.builder(
+      appBar: AppBar(title: Text("")),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: FutureBuilder<WriterDetail>(
+          future: futureDetail,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 5.0,
+                      crossAxisSpacing: 5.0),
+                    itemCount: 8,
+                    itemBuilder: (context, index){
+                      return Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: screenHeight * 0.15,
+                              color: Colors.grey.shade300,
+                            ).redacted(context: context, redact: true),
+                            SizedBox(height: 10),
+                            Container(
+                              width: 100,
+                              height: 20,
+                              color: Colors.grey.shade300,
+                            ).redacted(context: context, redact: true),
+                            SizedBox(height: 20),
+                          ],
+                      );
+                    });
+            } else if (snapshot.hasError) {
+              return Center(child: Text("Hata: ${snapshot.error}"));
+            } else if (!snapshot.hasData) {
+              return Center(child: Text("Detay yok"));
+            } else {
+              var writer = snapshot.data!;
+              return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 5.0,
+                  crossAxisSpacing: 10.0,
                   mainAxisSpacing: 5.0), 
                 itemCount: writer.books?.length ?? 0,
                 itemBuilder: (context, index){
@@ -168,22 +195,26 @@ class _WriterDetailPageState extends State<WriterDetailPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: Image.network(book?.image ?? "Image null", 
-                          fit: BoxFit.fill, 
+                          fit: BoxFit.fitHeight, 
                           width: double.infinity, 
                           height: screenHeight*0.15,
                           ),
                         ),
-                        Text(book?.titleTm ?? "Text Null", style: Theme.of(context).textTheme.titleMedium),
+                        Text(book?.titleTm ?? "Text Null", 
+                        style: Theme.of(context).textTheme.titleMedium, 
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,),
                       ],
                                         
                     ),
                   );
                   
-                }),
-            );
-            
-          }
-        },
+                });
+              
+            }
+          },
+        ),
       ),
     );
   }
