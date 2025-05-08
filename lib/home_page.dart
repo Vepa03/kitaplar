@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kitaplar/applocale.dart';
 import 'package:kitaplar/pages/about_us.dart';
 import 'package:kitaplar/pages/books.dart';
-import 'package:kitaplar/pages/hemmesi.dart';
 import 'package:kitaplar/pages/home.dart';
 import 'package:kitaplar/them_Provider.dart';
 import 'package:lottie/lottie.dart';
